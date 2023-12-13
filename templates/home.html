@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mx-auto mt-2 row row-cols-1 row-cols-md-3 g-4">
+    {% for post in data %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.description}}</p>
+                <p class="card-text"><span class="fw-bold">Author : </span> {{post.author}}</p>
+                <small class="fw-bold">Categores : </small>
+                {% for cat in post.categores.all %}
+                <button class="btn btn-primary btn-sm m-1" disabled>{{cat}}</button>
+                {% endfor %}
+            </div>
+            <div class="mx-auto">
+
+                <a class="btn btn-success m-2 text-uppercase" href="{% url 'edit_post' post.id %}">Edit</a>
+                <a class="btn btn-danger m-2 text-uppercase" href="{% url 'delete_post' post.id%}">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock content %}
